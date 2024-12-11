@@ -34,11 +34,8 @@ class Command(BaseCommand):
         with open(file_path, 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                if not model.objects.filter(roll_no=row["roll_no"]).exists():
-                    model.objects.create(**row)
-                    counter += 1
-                else:
-                    self.stdout.write(self.style.WARNING(f"Student with {row["roll_no"]} already exists"))
+                model.objects.create(**row)
+                counter += 1
 
         self.stdout.write(self.style.SUCCESS(f"Data imported from CSV successfully! {counter} records were created"))
 
