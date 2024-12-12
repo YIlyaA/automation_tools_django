@@ -17,7 +17,7 @@ class Command(BaseCommand):
         model_name = kwargs["model_name"].capitalize()
         model = None
 
-        for app_config in apps.get_app_configs():
+        :
             try:
                 model = apps.get_model(app_config.label, model_name)
                 break
