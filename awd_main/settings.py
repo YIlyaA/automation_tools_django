@@ -1,3 +1,4 @@
+from email.policy import default
 from pathlib import Path
 from re import template
 from unittest.mock import DEFAULT
@@ -10,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', defaulte=False, cast=bool)  # True or Fasle
+DEBUG = config('DEBUG', default=False, cast=bool)  # True or Fasle
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
@@ -132,6 +133,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Automate with Django <anukovich2@gmail.com>'
+DEFAULT_TO_EMAIL = 'yanukovichilya@gmail.com'

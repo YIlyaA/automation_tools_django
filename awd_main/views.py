@@ -9,4 +9,4 @@ def home(request):
 def celery_test(request):
     # for test execute a time consuming task here:
     celery_test_task.delay()
-    return HttpResponse('<h3>Function execited successfully</h3>')
+    return HttpResponse('<h3>Function executed successfully</h3>')
