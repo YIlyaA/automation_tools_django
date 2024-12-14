@@ -4,7 +4,7 @@ from re import template
 from unittest.mock import DEFAULT
 from decouple import config
 
-from django.conf.global_settings import DEFAULT_FROM_EMAIL, MEDIA_ROOT, MEDIA_URL
+from django.conf.global_settings import DEFAULT_FROM_EMAIL, MEDIA_ROOT, MEDIA_URL, STATICFILES_DIRS
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -107,6 +107,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
+    'awd_main/static'
+]
 
 # Media file config
 MEDIA_URL = 'media/'
