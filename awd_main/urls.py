@@ -9,6 +9,9 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('dataentry/', include('dataentry.urls')),
     path('celery-test/', views.celery_test),
+
+    # Registration and login
+    path('register/', views.register, name="register"),
 ]
 
 if settings.DEBUG:
