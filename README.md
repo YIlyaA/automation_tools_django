@@ -91,18 +91,3 @@ At line:1 char:1
 ```powershell
 powershell -ExecutionPolicy Bypass
 ```
-
-### 1. Virtual Environment Activation Issue
-If you encounter the following error when activating your virtual environment:
-```powershell
-<PATH> cannot be loaded because running scripts is disabled on this system. For more information, see 
-about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
-At line:1 char:1
-+ .\env\Scripts\activate
-```
-**Solution::**
-1. Open PowerShell as an Administrator.
-2. Run the following command to bypass execution policy restrictions:
-```powershell
-powershell -ExecutionPolicy Bypass
-```
