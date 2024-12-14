@@ -1,23 +1,7 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-</head>
-<body>
-    <div class="container">
+{% block content %}
+    <div class="container mt-5 alert-primary shadow" style="max-width: 600px; padding: 15px; border-radius: 10px;">
         <h3 class="text-center">Import Data To Database Table</h3>
 
         <form action="{% url "import_data" %}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin:auto; padding-top: 50px;">
@@ -37,14 +21,13 @@
                     {% endfor %}
                 </select>
             </div>
-
-            <input type="submit" value="Import Data" class="btn btn-primary">
+            
+            <div class="form-group">
+                <input type="submit" value="Import Data" class="btn btn-primary">
+            </div>
+            
         </form>
 
         {% include "alerts.html" %}
     </div>
-    
-</body>
-</html>
-
-
+{% endblock content %}
