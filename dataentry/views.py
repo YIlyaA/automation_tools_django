@@ -5,8 +5,10 @@ from uploads.models import Upload
 from django.conf import settings
 from django.contrib import messages
 from .tasks import import_data_task, export_data_task
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def import_data(request):
     if request.method == "POST":
         file_path = request.FILES.get('file_path')
@@ -40,7 +42,7 @@ def import_data(request):
         }
     return render(request, 'dataentry/import_data.html', context=context)
 
-
+@login_required
 def export_data(request):
     if request.method == "POST":
         model_name = request.POST.get('model_name')

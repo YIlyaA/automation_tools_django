@@ -59,4 +59,5 @@ def login(request):
 
 
 def logout(request):
-    return
+    auth.logout(request)
+    return redirect('home')
