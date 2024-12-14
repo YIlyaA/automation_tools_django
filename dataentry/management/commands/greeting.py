@@ -1,6 +1,5 @@
 from unittest.mock import Base
 from django.core.management import BaseCommand
-from django.core.management.base import CommandParser
 
 class Command(BaseCommand):
     help = "Greets the user"

@@ -1,6 +1,4 @@
 from django.core.management import BaseCommand
-from django.core.management.base import CommandParser
-from django.apps import apps
 from dataentry.utils import check_csv_errros
 import csv
 

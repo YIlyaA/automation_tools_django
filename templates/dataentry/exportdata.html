@@ -18,15 +18,10 @@
 </head>
 <body>
     <div class="container">
-        <h3 class="text-center">Import Data To Database Table</h3>
+        <h3 class="text-center">Export Data From Database Table</h3>
 
-        <form action="{% url "import_data" %}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin:auto; padding-top: 50px;">
+        <form action="{% url "export_data" %}" method="post" style="max-width: 600px; margin:auto; padding-top: 50px;">
             {% csrf_token %}
-
-            <div class="form-group">
-                <label for="file_path">Upload CSV file</label>
-                <input type="file" name="file_path" class="form-control" required>
-            </div>
 
             <div class="form-group">
                 <label for="model_name">Select Database Table</label>
@@ -38,7 +33,7 @@
                 </select>
             </div>
 
-            <input type="submit" value="Import Data" class="btn btn-primary">
+            <input type="submit" value="Export Data" class="btn btn-primary">
         </form>
 
         {% include "alerts.html" %}

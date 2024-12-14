@@ -1,9 +1,7 @@
-from typing import Any, Optional
-from django.core.management import BaseCommand, CommandError
+from django.core.management import BaseCommand
 import csv
-import datetime
 from django.apps import apps
-from django.core.management.base import CommandParser
+from dataentry.utils import generate_csv_file
 
 
 # Proposed command: py manage.py exportdata <model_name>
@@ -17,7 +15,8 @@ class Command(BaseCommand):
         model_name = kwargs["model_name"].capitalize()
         model = None
 
-        :
+        # search throw all the installed apps for the model
+        for app_config in apps.get_app_configs():
             try:
                 model = apps.get_model(app_config.label, model_name)
                 break
@@ -30,17 +29,14 @@ class Command(BaseCommand):
             return
 
         data = model.objects.all()  # fetch data from db
-        timestamp = datetime.datetime.now().strftime(
-            "%Y-%m-%d-%H-%M"
-        )  # generate timestamp of current date and time
 
-        # define csv file name\path
-        file_path = f"exported_{model_name}_data_{timestamp}.csv"
+        # generate csv file path
+        file_path = generate_csv_file(model_name)
 
         with open(file_path, "w", newline="") as file:  # open csv file and write data
             writer = csv.writer(file)
 
-            writer.writerow([field for field in model._meta.fields])  # headers
+            writer.writerow([field.name for field in model._meta.fields])  # headers
 
             for dt in data:
                 writer.writerow([getattr(dt, field.name) for field in model._meta.fields])
