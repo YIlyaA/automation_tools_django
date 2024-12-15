@@ -7,13 +7,20 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
+
+    # Dataentry app
     path('dataentry/', include('dataentry.urls')),
+
+    # Test views
     path('celery-test/', views.celery_test),
 
     # Registration and login
     path('register/', views.register, name="register"),
     path('login/', views.login, name="login"),
     path('logout/', views.logout, name="logout"),
+
+    # Bulk Emails
+    path('emails/', include('emails.urls')),
 ]
 
 if settings.DEBUG:
