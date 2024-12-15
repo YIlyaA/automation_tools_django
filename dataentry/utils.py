@@ -54,7 +54,7 @@ def check_csv_errros(file_path, model_name):
 def send_email_notifications(mail_subject, message, to_email, attachment=None):
     try:
         from_email = settings.DEFAULT_FROM_EMAIL
-        mail = EmailMessage(subject=mail_subject, body=message, from_email=from_email, to=[to_email])
+        mail = EmailMessage(subject=mail_subject, body=message, from_email=from_email, to=to_email)
         if attachment:
             mail.attach_file(attachment)
         mail.send()

@@ -7,7 +7,7 @@
     <div class="container mt-5 p-3 shadow rounded" style="max-width: 600px;">
         <h2 class="text-center">Compose an Email</h2>
 
-        <form action="{% url "send_email" %}" method="post">
+        <form action="{% url "send_email" %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
     
             <div class="form-group">
