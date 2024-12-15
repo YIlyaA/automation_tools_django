@@ -26,8 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # crispy filters for forms
     'crispy_forms',
     'crispy_bootstrap5',
+
+    # CKEditro for customizing emails
+    'ckeditor',
 
     'dataentry',
     'uploads',
@@ -148,3 +152,11 @@ DEFAULT_TO_EMAIL = 'yanukovichilya@gmail.com'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'toolbar': 'full',
+        'height': 200,
+    },
+}
