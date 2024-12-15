@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     # CKEditro for customizing emails
     'ckeditor',
 
+    # another smpt 
+    'anymail',
+
     'dataentry',
     'uploads',
     'emails',
@@ -141,14 +144,25 @@ MESSAGE_TAGS = {
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
 
+# ========================================
+
 # email configuration 
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT', cast=int)
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Automate with Django <anukovich2@gmail.com>'
 DEFAULT_TO_EMAIL = 'yanukovichilya@gmail.com'
+
+# USING ANOTHER SMTP
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "SENDINBLUE_API_KEY": config("SENDINBLUE_API_KEY"),
+}
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"  # or sendinblue.EmailBackend, or...
+
+# ========================================
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
