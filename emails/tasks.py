@@ -6,5 +6,4 @@ from dataentry.utils import send_email_notifications
 def send_email_task(mail_subject, message, to_email, attachment):
 
     send_email_notifications(mail_subject, message, to_email, attachment)
-
     return 'Email sending task executed successfully.'
