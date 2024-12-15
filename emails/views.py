@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from emails.models import Subscriber
+from emails.tasks import send_email_task
 from .forms import EmailForm
-from dataentry.utils import send_email_notifications
+
 
 
 # Create your views here.
@@ -36,7 +37,9 @@ def send_email(request):
                 attachment = email_form.attachment.path
             else:
                 attachment = None
-            send_email_notifications(mail_subject, message, to_email, attachment)
+
+            # Handover email sending task to celery
+            send_email_task.delay(mail_subject, message, to_email, attachment)
 
             # Display a success message
             messages.success(request, "Email sent successfully!")
