@@ -1,3 +1,4 @@
+from types import NoneType
 from django.apps import apps
 from django.core.management import CommandError
 import csv
@@ -7,6 +8,8 @@ from django.conf import settings
 import datetime
 import os
 from django.conf import settings
+
+from emails.models import Email, Sent
 
 def get_all_custom_models():
     default_models = ['ContentType', 'Session', 'LogEntry', 'Group', 'Permission', 'Upload', 'User']
@@ -51,7 +54,7 @@ def check_csv_errros(file_path, model_name):
     return model
 
 
-def send_email_notifications(mail_subject, message, to_email, attachment=None):
+def send_email_notifications(mail_subject, message, to_email, attachment=None, email_id=NoneType()):
     try:
         from_email = settings.DEFAULT_FROM_EMAIL
         mail = EmailMessage(subject=mail_subject, body=message, from_email=from_email, to=to_email)
@@ -60,6 +63,14 @@ def send_email_notifications(mail_subject, message, to_email, attachment=None):
 
         mail.content_subtype = "html"
         mail.send()
+
+        # Store the total sent email inside the Sent model
+        email = Email.objects.get(pk=email_id)
+        sent = Sent()
+        sent.email = email
+        sent.total_sent = email.email_list.count_emails()
+        sent.save()
+
     except Exception as e:
         raise e
 

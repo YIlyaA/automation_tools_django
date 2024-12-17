@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h2 class="text-center p-5">Email Statistics</h2>
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+
+                    <div class="card-header">
+                        <!-- To divied row on 2 parts -->
+                      <div class="row">
+                        <div class="col-md-6">
+                            Total Emails Sent: <b>0</b> <br>
+                            Sent at: <b>{{ email.sent_at }}</b>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            Opened: <b>0%</b> <br>
+                            Clicked: <b>0%</b>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                      <h4>{{ email.subject }}</h4>
+                      <div class"mail-body">
+                        {{email.body | safe }}
+                      </div>
+                      {% if email.attachment %}
+                        <div class="attachment">
+                            <img src="{{ email.attachment.url}}" alt="Email attachment" width="100%">
+                        </div>
+                      {% else %}
+                        <div class="no-attachment">
+                            <p>No attachment</p>
+                        </div>
+                      {% endif %}
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+
+        {% include "alerts.html" %}
+    </div>
+
+{% endblock content %}
