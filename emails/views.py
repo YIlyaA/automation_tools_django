@@ -50,3 +50,12 @@ def send_email(request):
             "email_form": email_form,
         }
     return render(request, "emails/send-email.html", context)
+
+
+def track_click(request):
+    return
+
+
+def track_open(request):
+    return
+
