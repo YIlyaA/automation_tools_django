@@ -43,7 +43,8 @@ DATABASE_URL=db.sqlite3
 EMAIL_HOST=smtp.gmail.com                 # or your preferred SMTP server 
 EMAIL_PORT=587                            # 587 for gmail
 EMAIL_HOST_USER=YOUR_EMAIL_ADDRESS    
-EMAIL_HOST_PASSWORD=YOUR_EMAIL_PASSWORD    
+EMAIL_HOST_PASSWORD=YOUR_EMAIL_PASSWORD
+SENDINBLUE_API_KEY=your_sendinblue_api_key
 ```
 *P.S. if you are using gmail, you need to enable 2FA, then go to `Manage your Google Account → Security → 2FA → App Passwords`, Generate an App Password and use it as EMAIL_HOST_PASSWORD*
 
