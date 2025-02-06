@@ -1,6 +1,6 @@
 from email.policy import default
 from pathlib import Path
-from re import template
+# from re import template
 from unittest.mock import DEFAULT
 from decouple import config
 
@@ -174,3 +174,8 @@ CKEDITOR_CONFIGS = {
         'height': 200,
     },
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8937-109-173-214-39.ngrok-free.app'    # trust to ngrok url to login, register
+]
+BASE_URL='https://8937-109-173-214-39.ngrok-free.app'

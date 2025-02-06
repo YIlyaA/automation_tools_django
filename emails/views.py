@@ -1,11 +1,11 @@
+from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import timezone
 import email
-from re import S
-from tkinter import SE
 from django.contrib import messages
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
-from emails.models import Email, Sent, Subscriber
+from emails.models import Email, EmailTracking, Sent, Subscriber
 from emails.tasks import send_email_task
 from .forms import EmailForm
 
@@ -55,19 +55,41 @@ def send_email(request):
         context = {
             "email_form": email_form,
         }
-    return render(request, "emails/send-email.html", context)
+        return render(request, "emails/send-email.html", context)
 
 
-def track_click(request):
-    return
+def track_click(request, unique_id):
+    try:
+        email_tracking = EmailTracking.objects.get(unique_id=unique_id)
+        # check if the clicked field is already set or not
+        url = request.GET.get("url")
+        # check if the clicked_at field is already set or not
+        if not email_tracking.clicked_at:
+            email_tracking.clicked_at = timezone.now()
+            email_tracking.save()
+            return HttpResponseRedirect(url)
+        else:
+            return HttpResponseRedirect(url)
+    except:
+        return HttpResponse("Email not found!")
 
 
-def track_open(request):
-    return
+def track_open(request, unique_id):
+    try:
+        email_tracking = EmailTracking.objects.get(unique_id=unique_id)
+        # check if the opened field is already set or not
+        if not email_tracking.opened_at:
+            email_tracking.opened_at = timezone.now()
+            email_tracking.save()
+            return HttpResponse("Email opened successfully!")
+        else:
+            return HttpResponse("Email already opened!")
+    except:
+        return HttpResponse("Email not found!")
 
 
 def track_dashboard(request):
-    emails = Email.objects.all().annotate(total_sent=Sum('sent__total_sent'))  #add total_sent to the Email model
+    emails = Email.objects.all().annotate(total_sent=Sum('sent__total_sent')).order_by('-sent_at')  #add total_sent to the Email model
 
     context = {
         "emails": emails,
