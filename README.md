@@ -73,6 +73,8 @@ celery -A awd_main worker --loglevel=info --pool=solo    # For Windows
 celery -A awd_main worker --loglevel=info                # For Linux
 ```
 
+4. Ngrok (you can test the website using ngrok):       
+Instalation guide: *https://ngrok.com/downloads*
 ----
 <br/>
 
