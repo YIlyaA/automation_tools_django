@@ -1,3 +1,5 @@
+import hashlib
+import time
 from types import NoneType
 from django.apps import apps
 from django.core.management import CommandError
@@ -9,7 +11,7 @@ import datetime
 import os
 from django.conf import settings
 
-from emails.models import Email, Sent
+from emails.models import Email, EmailTracking, Sent, Subscriber
 
 def get_all_custom_models():
     default_models = ['ContentType', 'Session', 'LogEntry', 'Group', 'Permission', 'Upload', 'User']
@@ -57,19 +59,43 @@ def check_csv_errros(file_path, model_name):
 def send_email_notifications(mail_subject, message, to_email, attachment=None, email_id=NoneType()):
     try:
         from_email = settings.DEFAULT_FROM_EMAIL
-        mail = EmailMessage(subject=mail_subject, body=message, from_email=from_email, to=to_email)
-        if attachment:
-            mail.attach_file(attachment)
+        for recepient_email in to_email:
+            # Create EmalTracking record (only for Bulk Email Tool)
+            if email_id:
+                email = Email.objects.get(pk=email_id)
+                subscriber = Subscriber.objects.get(email_list=email.email_list, email_address=recepient_email)
+                # generate unique id
+                timestamp = str(time.time())
+                data_to_hash = f"{recepient_email}{timestamp}"
 
-        mail.content_subtype = "html"
-        mail.send()
+                unique_id = hashlib.sha256(data_to_hash.encode()).hexdigest()
+                email_tracking = EmailTracking.objects.create(
+                    email = email,
+                    subscriber = subscriber,
+                    unique_id = unique_id
+                )
+
+                # Generate the tracking pixel
+
+                # Search for the links in the email body
+
+                # If there are links or urls in email body, we will inject our tracking url to that original link
+
+
+            mail = EmailMessage(subject=mail_subject, body=message, from_email=from_email, to=to_email)
+            if attachment:
+                mail.attach_file(attachment)
+
+            mail.content_subtype = "html"
+            mail.send()
+            
 
         # Store the total sent email inside the Sent model
-        email = Email.objects.get(pk=email_id)
-        sent = Sent()
-        sent.email = email
-        sent.total_sent = email.email_list.count_emails()
-        sent.save()
+        if email:
+            sent = Sent()
+            sent.email = email
+            sent.total_sent = email.email_list.count_emails()
+            sent.save()
 
     except Exception as e:
         raise e

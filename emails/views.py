@@ -1,7 +1,11 @@
+import email
+from re import S
+from tkinter import SE
 from django.contrib import messages
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
-from emails.models import Email, Subscriber
+from emails.models import Email, Sent, Subscriber
 from emails.tasks import send_email_task
 from .forms import EmailForm
 
@@ -24,7 +28,7 @@ def send_email(request):
             # Access the selected email list
             email_list = (
                 email.email_list
-            )  # print(email_list) ==> Developers (or another field in List model)
+            )  # print(email_list) ==>  (or another field in List model)
 
             # Extract email addresses for the Subscriber model in the selected email list
             subscribers = Subscriber.objects.filter(email_list=email_list)
@@ -63,7 +67,8 @@ def track_open(request):
 
 
 def track_dashboard(request):
-    emails = Email.objects.all()
+    emails = Email.objects.all().annotate(total_sent=Sum('sent__total_sent'))  #add total_sent to the Email model
+
     context = {
         "emails": emails,
     }
@@ -72,7 +77,10 @@ def track_dashboard(request):
 
 def track_stats(request, pk):
     email = get_object_or_404(Email, pk=pk)
+    sent = Sent.objects.get(email=email)
+
     context = {
-        "email": email
+        "email": email,
+        "total_sent": sent.total_sent,
     }
     return render(request, "emails/track_stats.html", context)
