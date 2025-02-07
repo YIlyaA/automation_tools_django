@@ -15,6 +15,14 @@
     python manage.py exportdata <model_name>
    ```
 
+### 3. **BULK EMAILS:**          
+   **Send emails to thousands of recipients at once.**     
+
+### 4. **EMAIL TRACKING:**          
+   **Complete Email Tracking System with Open rate & Click rate.**     
+
+### 5. **COMPRESS IMAGES:**          
+   **Image Compression Tool.**     
 ----
 <br/>
 
