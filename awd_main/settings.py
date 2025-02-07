@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'dataentry',
     'uploads',
     'emails',
+    'image_compression',
 ]
 
 MIDDLEWARE = [
@@ -176,6 +177,6 @@ CKEDITOR_CONFIGS = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8937-109-173-214-39.ngrok-free.app'    # trust to ngrok url to login, register
+    'https://416f-77-65-83-25.ngrok-free.app'    # trust to ngrok url to login, register
 ]
-BASE_URL='https://8937-109-173-214-39.ngrok-free.app'
+BASE_URL='https://416f-77-65-83-25.ngrok-free.app'

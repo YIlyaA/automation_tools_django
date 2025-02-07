@@ -58,7 +58,7 @@ def check_csv_errros(file_path, model_name):
     return model
 
 
-def send_email_notifications(mail_subject, message, to_email, attachment=None, email_id=NoneType()):
+def send_email_notifications(mail_subject, message, to_email, attachment=None, email_id=None):
     try:
         from_email = settings.DEFAULT_FROM_EMAIL
         for recepient_email in to_email:
@@ -106,7 +106,6 @@ def send_email_notifications(mail_subject, message, to_email, attachment=None, e
             mail.content_subtype = "html"
             mail.send()
             
-
         # Store the total sent email inside the Sent model
         if email_id:
             sent = Sent()

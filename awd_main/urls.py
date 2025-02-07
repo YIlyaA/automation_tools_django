@@ -21,6 +21,9 @@ urlpatterns = [
 
     # Bulk Emails
     path('emails/', include('emails.urls')),
+
+    # Compress Image
+    path('image-compression/', include('image_compression.urls')),
 ]
 
 if settings.DEBUG:
