@@ -24,6 +24,9 @@ urlpatterns = [
 
     # Compress Image
     path('image-compression/', include('image_compression.urls')),
+
+    # Stock analysis
+    path('webscraping/', include('stockannalysis.urls')),
 ]
 
 if settings.DEBUG:

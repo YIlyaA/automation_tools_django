@@ -1,5 +1,6 @@
 from django.core.management import BaseCommand
 from dataentry.utils import check_csv_errros
+from django.db import transaction
 import csv
 
 
@@ -14,7 +15,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         file_path = kwargs["file_path"]
         model_name = kwargs["model_name"].capitalize()
-        counter = 0
+        objects = []
 
         # check for errors in csv
         model = check_csv_errros(file_path, model_name)
@@ -23,10 +24,13 @@ class Command(BaseCommand):
             reader = csv.DictReader(file)
 
             for row in reader:
-                model.objects.create(**row)
-                counter += 1
+                obj = model(**row)
+                objects.append(obj)
 
-        self.stdout.write(self.style.SUCCESS(f"Data imported from CSV successfully! {counter} records were created"))
+            with transaction.atomic():
+                model.objects.bulk_create(objects, batch_size=1000)
+
+        self.stdout.write(self.style.SUCCESS(f"Data imported from CSV successfully! {len(objects)} records were created"))
 
 
 ##################### EXAMPLE ####################

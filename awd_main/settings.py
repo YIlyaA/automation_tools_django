@@ -19,6 +19,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'uploads',
     'emails',
     'image_compression',
+    'stockannalysis',
 ]
 
 MIDDLEWARE = [
@@ -177,6 +181,6 @@ CKEDITOR_CONFIGS = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://416f-77-65-83-25.ngrok-free.app'    # trust to ngrok url to login, register
+    'https://9dda-77-65-83-25.ngrok-free.app'    # trust to ngrok url to login, register
 ]
-BASE_URL='https://416f-77-65-83-25.ngrok-free.app'
+BASE_URL='https://9dda-77-65-83-25.ngrok-free.app'

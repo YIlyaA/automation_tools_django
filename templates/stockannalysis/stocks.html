@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .select2-container .select2-selection--single{
+        height: 40px !important;
+    }
+</style>
+
+    <div class="container mt-5 p-3 shadow rounded" style="max-width: 600px;">
+        <h2 class="text-center">Stock Market Analysis</h2>
+
+        <form action="{% url "stocks" %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ form | crispy}}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Get Ingo" class="btn btn-primary">
+            </div>
+            
+        </form>
+
+        {% include "alerts.html" %}
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        {{ form.media }} <!--Using autocompletes outside the admin-->
+    </div>
+{% endblock content %}
