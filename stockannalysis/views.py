@@ -4,10 +4,13 @@ from .models import Stock
 from .forms import StockForm
 
 def stocks(request):
-    form = StockForm()
-    context = {
-        'form': form,
-    }
+    if request.method == "POST":
+        pass
+    else:
+        form = StockForm()
+        context = {
+            'form': form,
+        }
     return render(request, "stockannalysis/stocks.html", context)
 
 class StockAutocomplete(autocomplete.Select2QuerySetView):
