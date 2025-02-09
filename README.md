@@ -2,27 +2,27 @@
 
 ## Features
 ### 1. **DATA IMPORT:**          
-   **Import data from CSV files directly into your database using a Django management command.**     
-   **Usage:**
-   ```bash
-    python manage.py importdata <path_to_csv_file> <model_name>
-   ```
+   **This feature streamlines the process of importing data by allowing users to upload CSV files directly into the database. It is highly effective for handling large datasets, utilizing background processing with Celery to ensure smooth, efficient imports without slowing down the application.**     
+   *P.S. Usage in the console:
+   `python manage.py importdata <path_to_csv_file> <model_name>`*
 
 ### 2. **DATA EXPORT:**          
-   **Export data from your database to a CSV file.**     
-   **Usage:**
-   ```bash
-    python manage.py exportdata <model_name>
-   ```
+   **This feature allows users to easily extract and download data from their database in CSV format.**     
+   *P.S. Usage in the console:
+   `python manage.py exportdata <model_name>`*
 
 ### 3. **BULK EMAILS:**          
-   **Send emails to thousands of recipients at once.**     
+   **This tool allows users to efficiently send personalized emails to large groups of recipients simultaneously. It is ideal for marketing campaigns, newsletters, and announcements, ensuring timely delivery and improved outreach.**     
 
-### 4. **EMAIL TRACKING:**          
-   **Complete Email Tracking System with Open rate & Click rate.**     
+### 4. **Complete Email Tracking System with Open Rate & Click Rate:**          
+   **This system monitors and analyzes email performance by tracking open rates and click rates, providing insights into recipient engagement. It helps users optimize their email campaigns by identifying which messages are most effective.**     
 
 ### 5. **COMPRESS IMAGES:**          
-   **Image Compression Tool.**     
+   **This tool reduces the file size of images by a chosen percentage of compression. It supports various image formats like JPEG, PNG, JPG, allowing users to optimize images for faster website loading times, reduced storage usage, and quicker sharing.**
+
+### 6. **STOCK MARKET ANALYSIS TOOL:** 
+   **This tool collects and displays up-to-date stock market data from various exchanges, helping users track price movements, market trends, and key financial metrics.**
+
 ----
 <br/>
 
